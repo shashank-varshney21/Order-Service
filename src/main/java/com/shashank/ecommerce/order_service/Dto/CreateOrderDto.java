@@ -1,15 +1,14 @@
 package com.shashank.ecommerce.order_service.Dto;
 
-import com.shashank.ecommerce.order_service.Entity.OrderItemsEntity;
 import com.shashank.ecommerce.order_service.Enums.OrderStatus;
 import lombok.Data;
+
 import java.util.List;
 
 @Data
-public class OrderRequestDto {
-    private Long id;
-    private Long customerId;
-    private List<OrderItemsEntity> items;
+public class CreateOrderDto {
     private Double totalPrice;
+    private Long customerId;
     private OrderStatus orderStatus;
+    private List<CreateOrderItemDto> createOrderItemDto;
 }

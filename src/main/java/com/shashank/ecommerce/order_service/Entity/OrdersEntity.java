@@ -26,6 +26,8 @@ public class OrdersEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    private Long customerId; //There will be a customer service that has customer table mapped with this id.
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItemsEntity> items;
 }

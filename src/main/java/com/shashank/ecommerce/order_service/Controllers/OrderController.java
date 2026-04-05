@@ -1,5 +1,8 @@
 package com.shashank.ecommerce.order_service.Controllers;
 
+import com.shashank.ecommerce.order_service.Dto.CreateOrderDto;
+import com.shashank.ecommerce.order_service.Entity.OrdersEntity;
+import com.shashank.ecommerce.order_service.Enums.OrderStatus;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import com.shashank.ecommerce.order_service.Dto.OrderRequestDto;
 import com.shashank.ecommerce.order_service.Services.OrderService;
@@ -7,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
@@ -55,4 +55,25 @@ public class OrderController {
                 .retrieve()
                 .body(String.class);
         }
+
+    @GetMapping("/customer/{customerId}")
+        public List<OrderRequestDto> getCustomerOrders(@PathVariable Long customerId,@RequestParam int page, @RequestParam int size) {
+        return orderService.getCustomerOrders(customerId, page, size);
+    }
+
+    @PostMapping("/create/order")
+        public ResponseEntity<String> createOrder(CreateOrderDto orderDto) {
+            return orderService.createOrder(orderDto);
+    }
+
+    @PatchMapping("/{id}/status/{status}")
+        public ResponseEntity<String> updateOrderStatus(@PathVariable Long id, @PathVariable OrderStatus status) {
+            return orderService.updateOrderStatus(id, status);
+    }
+
+    @DeleteMapping("/{id}")
+        public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
+            return orderService.deleteOrder(id);
+    }
+
 }
