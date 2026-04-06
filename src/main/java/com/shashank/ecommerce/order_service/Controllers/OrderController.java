@@ -1,7 +1,6 @@
 package com.shashank.ecommerce.order_service.Controllers;
 
 import com.shashank.ecommerce.order_service.Dto.CreateOrderDto;
-import com.shashank.ecommerce.order_service.Entity.OrdersEntity;
 import com.shashank.ecommerce.order_service.Enums.OrderStatus;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import com.shashank.ecommerce.order_service.Dto.OrderRequestDto;
@@ -62,7 +61,7 @@ public class OrderController {
     }
 
     @PostMapping("/create/order")
-        public ResponseEntity<String> createOrder(CreateOrderDto orderDto) {
+        public ResponseEntity<String> createOrder(@RequestBody CreateOrderDto orderDto) {
             return orderService.createOrder(orderDto);
     }
 

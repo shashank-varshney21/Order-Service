@@ -17,11 +17,6 @@ public class OrderItemsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long productId;
-    private Integer quantity;
-
-    @ManyToOne
-    @JoinColumn(name="order_id")
-    @JsonIgnore
-    private OrdersEntity order;
+    private String title;
+    private Integer stock;
 }
